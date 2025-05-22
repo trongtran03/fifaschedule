@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class MatchesScreen extends StatelessWidget {
-  final String filter; // 'all', 'PL', or 'PD'
+  final String filter; 
 
   const MatchesScreen({super.key, required this.filter});
 
