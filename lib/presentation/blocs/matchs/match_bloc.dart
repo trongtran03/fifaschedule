@@ -15,7 +15,7 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     emit(MatchesLoading());
 
     try {
-      final allMatches = await getMatchesUseCase('2025-05-15', '2025-05-25');
+      final allMatches = await getMatchesUseCase('2025-05-16', '2025-05-26');
       final premierLeagueMatches = allMatches.where((match) => match.competitionCode == 'PL').toList();
       final laLigaMatches = allMatches.where((match) => match.competitionCode == 'PD').toList();
 
