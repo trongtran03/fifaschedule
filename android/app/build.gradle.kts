@@ -3,6 +3,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // Thêm dòng dưới để kích hoạt plugin Google Services
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -24,7 +26,7 @@ android {
         applicationId = "com.example.fifaschedule"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -41,4 +43,12 @@ android {
 
 flutter {
     source = "../.."
+}
+dependencies {
+    // Import Firebase BoM để đồng bộ version
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+
+    // Thêm các thư viện Firebase cần thiết
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-analytics")
 }

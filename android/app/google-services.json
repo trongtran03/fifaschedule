@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "392099018126",
+    "project_id": "footballauth-cc73b",
+    "storage_bucket": "footballauth-cc73b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392099018126:android:bd681754996029b604a0df",
+        "android_client_info": {
+          "package_name": "com.example.fifaschedule"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzeYlQ2yONt5VUuyasv1Ao7qM9UKRhJuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
