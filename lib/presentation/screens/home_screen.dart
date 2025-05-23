@@ -1,4 +1,5 @@
 import 'package:fifaschedule/presentation/screens/matches_screen.dart';
+import 'package:fifaschedule/presentation/screens/profile_screen.dart';
 import 'package:fifaschedule/presentation/screens/standings_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     _pages = [
       _HomeTabContent(tabController: _tabController),
       const StandingsScreen(),
-      const Center(child: Text("Profile Screen")),
+      const ProfileScreen(),
     ];
   }
 
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return Scaffold(
       appBar: _selectedIndex == 0
           ? AppBar(
+            automaticallyImplyLeading: false,
               title: Row(
                 children: [
                   Image.asset('assets/images/logofifa.png', height: 40),

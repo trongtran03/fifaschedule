@@ -8,35 +8,36 @@ import 'package:fifaschedule/presentation/blocs/matchs/match_bloc.dart';
 import 'package:fifaschedule/presentation/blocs/matchs/match_event.dart';
 import 'package:fifaschedule/presentation/blocs/standings/standings_bloc.dart';
 import 'package:fifaschedule/presentation/screens/home_screen.dart';
-import 'package:fifaschedule/presentation/screens/matches_screen.dart';
-import 'package:fifaschedule/presentation/screens/standings_screen.dart';
+import 'package:fifaschedule/presentation/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//test commit git
-void main() {
-  runApp(const FootballApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  final user = FirebaseAuth.instance.currentUser;
+  runApp(FootballApp(isLoggedIn: user != null));
 }
 
 class FootballApp extends StatelessWidget {
-  const FootballApp({super.key});
+  final bool isLoggedIn;
+  const FootballApp({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create:
-              (context) => MatchBloc(
-                GetMatchesUseCase(MatchRepositoryImpl(MatchRemoteDataSource())),
-              )..add(FetchMatches()),
+          create: (context) => MatchBloc(
+            GetMatchesUseCase(MatchRepositoryImpl(MatchRemoteDataSource())),
+          )..add(FetchMatches()),
         ),
         BlocProvider(
-          create:
-              (context) => StandingsBloc(
-                GetStandingsUseCase(
-                  StandingsRepositoryImpl(StandingsRemoteDataSource()),
-                ),
-              ),
+          create: (context) => StandingsBloc(
+            GetStandingsUseCase(StandingsRepositoryImpl(StandingsRemoteDataSource())),
+          ),
         ),
       ],
       child: MaterialApp(
@@ -52,9 +53,8 @@ class FootballApp extends StatelessWidget {
             elevation: 4,
           ),
         ),
-        home: const HomeScreen(),
+        home: isLoggedIn ? const HomeScreen() :  LoginScreen(),
       ),
     );
   }
 }
-
