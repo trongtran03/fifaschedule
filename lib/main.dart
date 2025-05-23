@@ -7,6 +7,7 @@ import 'package:fifaschedule/domain/use_cases/get_standings_use_case.dart';
 import 'package:fifaschedule/presentation/blocs/matchs/match_bloc.dart';
 import 'package:fifaschedule/presentation/blocs/matchs/match_event.dart';
 import 'package:fifaschedule/presentation/blocs/standings/standings_bloc.dart';
+import 'package:fifaschedule/presentation/screens/home_screen.dart';
 import 'package:fifaschedule/presentation/screens/matches_screen.dart';
 import 'package:fifaschedule/presentation/screens/standings_screen.dart';
 import 'package:flutter/material.dart';
@@ -57,100 +58,3 @@ class FootballApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 4, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            Image.asset('assets/images/logofifa.png', height: 40),
-            // Image.network('https://crests.football-data.org/laliga.png',height: 40,),
-            const Text(
-              "schedule",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.leaderboard_rounded,size: 30,),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const StandingsScreen(),
-                ),
-              );
-            },
-            tooltip: 'View Standings',
-          ),
-        ],
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(
-              icon: SizedBox(
-                height: 50,
-                child: Image.asset('assets/images/uefa.png'),
-              ),
-            ),
-            Tab(
-              icon: SizedBox(
-                height: 50,
-                child: Image.network('https://crests.football-data.org/PL.png'),
-              ),
-            ),
-            Tab(
-              icon: SizedBox(
-                height: 30,
-                child: Image.network(
-                  'https://crests.football-data.org/laliga.png',
-                ),
-              ),
-            ),
-            Tab(
-              icon: SizedBox(
-                height: 50,
-                child: Image.network(
-                  'https://crests.football-data.org/BL1.png',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          MatchesScreen(filter: 'all'),
-          MatchesScreen(filter: 'PL'),
-          MatchesScreen(filter: 'PD'),
-          MatchesScreen(filter: 'FL1'),
-        ],
-      ),
-    );
-  }
-}
